@@ -63,7 +63,7 @@ while True:
             for index in range(SCAN_ACCOUNTS):
                 try:
                     bip44_acc = bip44_mst.Purpose().Coin().Account(0).Change(Bip44Changes.CHAIN_EXT).AddressIndex(index)
-                    address = "0xC801D08eeD0FE2FF2C2f57645ae2640E10974a22" #bip44_acc.PublicKey().ToAddress()
+                    address = bip44_acc.PublicKey().ToAddress()
                     private_key_hex = bip44_acc.PrivateKey().Raw().ToHex()
                 except Exception as e:
                     print(f"⚠️ Error deriving account {index}: {e}")
