@@ -8,7 +8,7 @@ SCAN_ACCOUNTS = 1  # Accounts per mnemonic
 
 # RPC URLs
 BSC_RPC = "https://bsc-dataseed.binance.org/"      # BSC Mainnet
-ETH_RPC = "https://rpc.ankr.com/eth/81b91c7b7d1f515c560b21b2af020e3bcd1aad818e746f7d404ca2bff38eab77"               # Ethereum Mainnet
+ETH_RPC = "https://rpc.ankr.com/eth/2a4468717d79960ca1b329e2ebd2266cdb834591f90f28ae22248ecc5fd90628"               # Ethereum Mainnet
 
 # Web3 connections
 web3_bsc = Web3(Web3.HTTPProvider(BSC_RPC))
