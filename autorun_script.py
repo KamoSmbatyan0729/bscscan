@@ -10,4 +10,4 @@ while True:
         subprocess.run(["python3", script], check=True)
 
     print("✅ Finished one round. Waiting 1 hour...")
-    time.sleep(3600)  # wait 3600 seconds = 1 hour
+    time.sleep(1)  # wait 3600 seconds = 1 hour
