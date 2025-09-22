@@ -10,12 +10,10 @@ SCAN_ACCOUNTS = 3  # Accounts per mnemonic
 
 # RPC URLs
 BSC_RPC = "https://bsc-dataseed.binance.org/"
-ETH_RPC = "https://rpc.ankr.com/eth/87699588acb12291d7267b5a48936c6a2b8cef48148a6a170ce52b9361eb59e0"
 TRON_API = "https://api.trongrid.io"  # Mainnet API
 
 # Web3 connections
 web3_bsc = Web3(Web3.HTTPProvider(BSC_RPC))
-web3_eth = Web3(Web3.HTTPProvider(ETH_RPC))
 
 mnemo = Mnemonic("english")
 count = 0
@@ -27,14 +25,6 @@ def get_bnb_balance(address):
         return web3_bsc.from_wei(balance_wei, 'ether')
     except Exception as e:
         print(f"⚠️ BSC balance error: {e}")
-        return 0
-
-def get_eth_balance(address):
-    try:
-        balance_wei = web3_eth.eth.get_balance(address)
-        return web3_eth.from_wei(balance_wei, 'ether')
-    except Exception as e:
-        print(f"⚠️ ETH balance error: {e}")
         return 0
 
 def eth_to_tron_address(address):
@@ -91,25 +81,24 @@ try:
 
             # Check balances
             balance_bnb = get_bnb_balance(address)
-            balance_eth = get_eth_balance(address)
             balance_trx = get_trx_balance(tron_address)
 
             count += 1
-            print(f"[{count}] {address} - BNB: {balance_bnb} | ETH: {balance_eth} | {tron_address} -  TRX: {balance_trx}")
+            print(f"[{count}] {address} - BNB: {balance_bnb} | {tron_address} -  TRX: {balance_trx}")
 
-            if balance_bnb > 0.001 or balance_eth > 0.001 or balance_trx > 1:
+            if balance_bnb > 0.001 or balance_trx > 1:
                 print("\n🚨 FUNDED WALLET FOUND 🚨")
                 print(f"Mnemonic: {mnemonic_phrase}")
                 print(f"Private Key (HEX): {private_key_hex}")
                 print(f"Address: {address}")
-                print(f"BNB: {balance_bnb} | ETH: {balance_eth} | TRX: {balance_trx}\n")
+                print(f"BNB: {balance_bnb} | TRX: {balance_trx}\n")
 
                 try:
                     with open("funded_wallets.txt", "a") as f:
                         f.write(f"Mnemonic: {mnemonic_phrase}\n")
                         f.write(f"Private Key (HEX): {private_key_hex}\n")
                         f.write(f"Address: {address}\n")
-                        f.write(f"BNB: {balance_bnb} | ETH: {balance_eth}\n")
+                        f.write(f"BNB: {balance_bnb} | TRX: {balance_trx}\n")
                         f.write("="*50 + "\n")
                 except Exception as e:
                     print(f"⚠️ Error writing to file: {e}")
